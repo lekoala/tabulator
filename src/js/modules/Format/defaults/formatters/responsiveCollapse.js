@@ -13,16 +13,18 @@ export default function(cell, formatterParams, onRendered){
 
 		config.open = isOpen;
 
-		if(collapseEl){
+        if(config.open){
+            el.classList.add("open");
+        }else{
+            el.classList.remove("open");
+        }
 
-			if(config.open){
-				el.classList.add("open");
-				collapseEl.style.display = '';
-			}else{
-				el.classList.remove("open");
-				collapseEl.style.display = 'none';
-			}
-		}
+        if(collapseEl){
+            collapseEl.style.display = isOpen ? "" : "none";
+        }
+
+        cell.getRow()._row.dispatch("row-responsive-toggled", cell.getRow(), isOpen);
+        cell.getTable().rowManager.adjustTableSize();
 	}
 
 	el.addEventListener("click", function(e){
