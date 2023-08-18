@@ -5,6 +5,11 @@ export default {
 
 		return data ? JSON.parse(data) : false;
 	},
+	session:function(id, type){
+		var data = sessionStorage.getItem(id + "-" + type);
+
+		return data ? JSON.parse(data) : false;
+	},
 	cookie:function(id, type){
 		var cookie = document.cookie,
 		key = id + "-" + type,
